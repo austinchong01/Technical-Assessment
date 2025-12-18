@@ -6,7 +6,7 @@ A full-stack application for implementing face detection on video content, desig
 
 This repository contains two main components:
 
-### Backend (`/app`)
+### Backend (`/backend`)
 - **Technology**: Python Flask/FastAPI
 - **Purpose**: Provides API endpoints for face detection processing
 - **Key Files**:
@@ -45,7 +45,7 @@ This repository contains two main components:
 
 4. Start the backend server:
    ```bash
-   python app/main.py
+   python backend/main.py
    ```
 
 The backend will run on `http://127.0.0.1:8080`
