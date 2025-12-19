@@ -31,7 +31,7 @@ def detect_faces_in_image(base64_image: str) -> list:
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(120, 120))
     
-    # Format results to match frontend FaceDetection interface
+    # format results
     detections = []
     for (x, y, w, h) in faces:
         detections.append({
@@ -40,7 +40,7 @@ def detect_faces_in_image(base64_image: str) -> list:
             "y": int(y),
             "width": int(w),
             "height": int(h),
-            "confidence": 1,  # Haar cascade doesn't provide confidence=
+            "confidence": 1,  #doesn't provide confidence
         })
     
     logger.info(f"Detected {len(detections)} faces")
@@ -49,7 +49,7 @@ def detect_faces_in_image(base64_image: str) -> list:
 def blur(base64_image: str, detections: list) -> str:
     image = decode_base64_image(base64_image)
     
-    # Save the original face regions first
+    # Save the original face box
     face_regions = []
     for detection in detections:
         x = detection['x']
@@ -58,10 +58,10 @@ def blur(base64_image: str, detections: list) -> str:
         h = detection['height']
         face_regions.append((x, y, w, h, image[y:y+h, x:x+w].copy()))
     
-    # Blur the entire image
+    # Blur entire image
     blurred = cv2.GaussianBlur(image, (51, 51), 0)
     
-    # Restore the original (sharp) face regions
+    # Restore face region
     for (x, y, w, h, face) in face_regions:
         blurred[y:y+h, x:x+w] = face
     
@@ -71,7 +71,7 @@ def blur(base64_image: str, detections: list) -> str:
 def grayscale(base64_image: str, detections: list) -> str:
     image = decode_base64_image(base64_image)
     
-    # Save the original face regions first
+    # Save the original face box
     face_regions = []
     for detection in detections:
         x = detection['x']
@@ -80,11 +80,11 @@ def grayscale(base64_image: str, detections: list) -> str:
         h = detection['height']
         face_regions.append((x, y, w, h, image[y:y+h, x:x+w].copy()))
     
-    # Convert entire image to grayscale
+    # Blur entire image
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     gray_bgr = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
     
-    # Restore the original color face regions
+    # Restore face region
     for (x, y, w, h, face) in face_regions:
         gray_bgr[y:y+h, x:x+w] = face
     

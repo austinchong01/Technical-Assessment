@@ -23,7 +23,7 @@ def detect_faces():
         image_data = data.get('image')  # Base64 string from frontend
         
         if not image_data:
-            return jsonify({"error": "No image provided"}), 400
+            return jsonify({"error": "No image provided"}), 400 # Bad request
         
         detections = detect_faces_in_image(image_data)
         return jsonify({"detections": detections}), 200
@@ -39,10 +39,10 @@ def grayscale_faces():
         detections = data.get('detections')
         
         if not image_data:
-            return jsonify({"error": "No image provided"}), 400
+            return jsonify({"error": "No image provided"}), 400 # Bad request
         
         if not detections:
-            return jsonify({"error": "No detections provided"}), 400
+            return jsonify({"error": "No detections provided"}), 400 # Bad request
         
         modified_image = grayscale(image_data, detections)
         return jsonify({"image": modified_image}), 200
@@ -58,10 +58,10 @@ def blur_faces():
         detections = data.get('detections')
         
         if not image_data:
-            return jsonify({"error": "No image provided"}), 400
+            return jsonify({"error": "No image provided"}), 400 # Bad request
         
         if not detections:
-            return jsonify({"error": "No detections provided"}), 400
+            return jsonify({"error": "No detections provided"}), 400 # Bad request
         
         modified_image = blur(image_data, detections)
         return jsonify({"image": modified_image}), 200

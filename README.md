@@ -72,16 +72,17 @@ The frontend will run on `http://localhost:3000`
 ## API Endpoints
 
 ### Backend Routes
-- `GET /hello-world` - Test endpoint to verify backend connectivity
-- Additional endpoints can be added for face detection processing
+- `POST /detect-faces` - Process JSON image, send back "detections" array
+- `POST /grayscale-faces` - Apply grayscale given "detections" array, send back modified image
+- `POST /blur-faces` - Apply blur given "detections" array, send back modified image
 
 ## Usage
 
 1. Start both the backend and frontend servers
 2. Open your browser to `http://localhost:3000`
 3. The video will be displayed and ready for face detection
-4. Click "Ping Backend" to test the connection between frontend and backend
-5. Implement face detection logic in the backend and connect it to the frontend
+4. Click "Grayscale" or "Blur" to start effects
+5. Click "Stop Detection" to stop effects
 
 ## Development Notes
 

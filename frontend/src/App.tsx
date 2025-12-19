@@ -47,7 +47,7 @@ const App: React.FC = () => {
       const faceDetections = detectData.detections || [];
       setDetections(faceDetections);
 
-      // Step 2: Apply grayscale
+      // apply grayscale
       if (faceDetections.length > 0) {
         const effectRes = await fetch("http://127.0.0.1:8080/grayscale-faces", {
           method: "POST",
@@ -59,7 +59,7 @@ const App: React.FC = () => {
         });
         const effectData = await effectRes.json();
 
-        // Step 3: Draw the modified image on the canvas
+        // draw modified image
         const img = new Image();
         img.onload = () => {
           const ctx = canvas.getContext("2d");
@@ -121,7 +121,7 @@ const App: React.FC = () => {
         });
         const effectData = await effectRes.json();
 
-        // Step 3: Draw the modified image on the canvas
+        // draw modified image
         const img = new Image();
         img.onload = () => {
           const ctx = canvas.getContext("2d");
@@ -150,7 +150,7 @@ const App: React.FC = () => {
     const video = videoRef.current;
     if (!video) return;
 
-    // Start video playback if paused
+    // Start if video is paused
     if (video.paused) {
       video.play();
     }
@@ -164,7 +164,7 @@ const App: React.FC = () => {
     const video = videoRef.current;
     if (!video) return;
 
-    // Start video playback if paused
+    // Start if video is paused
     if (video.paused) {
       video.play();
     }
@@ -194,7 +194,6 @@ const App: React.FC = () => {
       <div style={{ textAlign: "center" }}>
         <div className="video-container">
           <VideoPlayer ref={videoRef} src={videoUrl} />
-          {/* Canvas overlay for processed frame */}
           <canvas
             ref={canvasRef}
             className="processed-frame-canvas"
